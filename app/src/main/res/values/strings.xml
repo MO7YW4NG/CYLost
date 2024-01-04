@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">CYLost</string>
+    <string name="title_home">主頁</string>
+    <string name="title_upload">上傳</string>
+    <string name="title_my">我</string>
+    <string name="title_upload_lost">上傳遺失</string>
+    <string name="title_upload_find">找遺失</string>
+    <string name="title_activity_upload_find">upload_find</string>
+    <string name="title_login">登入</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="upload">上傳照片</string>
+    <string name="maps_api"></string>
+
+    <string name="invalid_username">非正確學號</string>
+    <string name="invalid_password">密碼必須超過5個字元</string>
+    <string name="login_failed">"登入失敗"</string>
+</resources>
