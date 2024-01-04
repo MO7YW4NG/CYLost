@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="me.moty.cylost.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        app:launchSingleTop="true"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_upload"
+            app:destination="@id/navigation_upload" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_my"
+            app:destination="@id/navigation_my"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_my"
+        android:name="me.moty.cylost.ui.my.MyFragment"
+        android:label="@string/title_my"
+        tools:layout="@layout/fragment_my" >
+        <action
+            android:id="@+id/action_navigation_my_to_navigation_login"
+            app:destination="@id/navigation_login"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_my"/>
+    </fragment>
+
+    <action
+        android:id="@+id/action_pop_out_of_upload"
+        app:popUpTo="@id/navigation_upload"
+        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/navigation_upload"
+        android:name="me.moty.cylost.ui.upload.UploadFragment"
+        android:label="@string/title_upload"
+        tools:layout="@layout/fragment_upload">
+        <action
+            android:id="@+id/action_navigation_upload_to_navigation_upload_lost"
+            app:popUpToSaveState="true"
+            app:popUpToInclusive="true"
+            app:destination="@id/navigation_upload_lost" />
+        <action
+            android:id="@+id/action_navigation_upload_to_navigation_upload_find"
+            app:popUpToSaveState="true"
+            app:popUpToInclusive="true"
+            app:destination="@id/navigation_upload_find" />
+        <action
+            android:id="@+id/action_navigation_upload_to_navigation_my"
+            app:destination="@id/navigation_my" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_upload_lost"
+        android:name="me.moty.cylost.ui.upload.UploadLostItem"
+        android:label="@string/title_upload_lost"
+        tools:layout="@layout/fragment_upload_lost_item" >
+        <action
+            android:id="@+id/action_navigation_upload_lost_to_navigation_upload"
+            app:destination="@id/navigation_upload" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="me.moty.cylost.ui.login.LoginFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_my"
+            app:popUpToInclusive="true"
+            app:destination="@id/navigation_my" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_upload_find"
+        android:name="me.moty.cylost.ui.upload.UploadFind"
+        android:label="@string/title_upload_find"
+        tools:layout="@layout/fragment_upload_find">
+        <action
+            android:id="@+id/action_navigation_upload_find_to_navigation_upload"
+            app:popUpToInclusive="true"
+            app:destination="@id/navigation_upload" />
+    </fragment>
+
+</navigation>
