@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteException
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +24,7 @@ import me.moty.cylost.RecordType
 import me.moty.cylost.adapters.MainAdapter
 import me.moty.cylost.adapters.OnRecyclerViewClickListener
 import me.moty.cylost.databinding.FragmentHomeBinding
+import java.time.LocalDate
 import java.util.EnumMap
 
 
@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
     private var filterFragment: FilterFragment = FilterFragment(this)
 
     var condition: EnumMap<FilterTag, String> =
-        EnumMap(me.moty.cylost.ui.home.FilterTag::class.java)
+        EnumMap(FilterTag::class.java)
 
     private val binding get() = _binding!!
 
@@ -71,12 +71,10 @@ class HomeFragment : Fragment() {
             dataSize =
                 retrieveDataSize()
             val shared = MainActivity.sharedPreferences
-            if (dataSize == 0 || (shared.contains("lastFetch") && System.currentTimeMillis() - shared.getLong(
-                    "lastFetch", System.currentTimeMillis()
-                ) >= 1000 * 60 * 60 * 24
-                        )) {
+            if (dataSize == 0 || (shared.contains("lastFetch") && LocalDate.now().dayOfMonth
+                        != shared.getInt("lastFetch", 0))) {
                 val editor: SharedPreferences.Editor = shared.edit()
-                editor.putLong("lastFetch", System.currentTimeMillis())
+                editor.putInt("lastFetch", LocalDate.now().dayOfMonth)
                 editor.apply()
                 homeViewModel.fetchData {
                     dataSize += it
@@ -106,7 +104,7 @@ class HomeFragment : Fragment() {
                     Thread.sleep(300)
                     this.lifecycleScope.launch {
                         updateAdapter {
-                            loading.visibility = View.GONE;
+                            loading.visibility = View.GONE
                         }
                     }
                 }
